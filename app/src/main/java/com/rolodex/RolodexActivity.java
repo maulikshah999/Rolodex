@@ -7,12 +7,11 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.rolodex.adapters.CardAdapter;
 import com.rolodex.models.Robot;
@@ -57,7 +56,7 @@ public class RolodexActivity extends AppCompatActivity {
         });
     }
 
-    private void init(){
+    private void init() {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(RolodexActivity.this, LinearLayoutManager.HORIZONTAL, false));
@@ -68,7 +67,7 @@ public class RolodexActivity extends AppCompatActivity {
         new MyHttpRequestTask().execute(Constants.URL);
     }
 
-    private void populateCardView(){
+    private void populateCardView() {
         cardAdapter.notifyDataSetChanged();
     }
 
@@ -94,7 +93,7 @@ public class RolodexActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private class MyHttpRequestTask extends AsyncTask<String,Integer,String> {
+    private class MyHttpRequestTask extends AsyncTask<String, Integer, String> {
 
         @Override
         protected String doInBackground(String... params) {
@@ -107,7 +106,7 @@ public class RolodexActivity extends AppCompatActivity {
                 httpURLConnection.setRequestMethod("POST");
 
                 httpURLConnection.setRequestProperty("Content-Type", "application/json");
-                try{
+                try {
 
                     httpURLConnection.setDoOutput(true);
 
@@ -121,16 +120,16 @@ public class RolodexActivity extends AppCompatActivity {
                         total.append(line).append('\n');
                     }
                     response = total.toString();
-                    Log.d("Response",""+response);
+                    Log.d("Response", "" + response);
 
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
-                }finally {
+                } finally {
                     httpURLConnection.disconnect();
                 }
 
 
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -142,14 +141,14 @@ public class RolodexActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-            if(result.length() > 0){
+            if (result.length() > 0) {
                 listRolodex.clear();
-                try{
+                try {
                     /**Parsing JSON Object from the result
                      * */
                     JSONArray jsonArray = new JSONArray(result);
                     JSONObject robotJObj = null;
-                    for(int i=0;i<jsonArray.length();i++){
+                    for (int i = 0; i < jsonArray.length(); i++) {
                         robotJObj = jsonArray.optJSONObject(i);
                         /**Store the data into 'Robot' model
                          * */
@@ -167,12 +166,12 @@ public class RolodexActivity extends AppCompatActivity {
                          * */
                         listRolodex.add(robot);
                     }
-                } catch(JSONException je){
+                } catch (JSONException je) {
                     je.printStackTrace();
                 }
 
                 // Notify Adapter for data changes
-               populateCardView();
+                populateCardView();
 
             }
 

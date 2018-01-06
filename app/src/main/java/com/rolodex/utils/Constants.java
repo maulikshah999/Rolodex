@@ -2,7 +2,7 @@ package com.rolodex.utils;
 
 /**
  * Created by mauli on 1/5/2018.
- *
+ * <p>
  * Defined Constants
  */
 

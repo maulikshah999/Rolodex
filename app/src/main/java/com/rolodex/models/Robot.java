@@ -11,11 +11,15 @@ public class Robot {
     private String email = "";
     private String company = "";
     private String startDate = "";
-    private String bio ="";
+    private String bio = "";
     private String avatar = "";
 
     public String getLastName() {
         return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getFirstName() {
@@ -64,10 +68,6 @@ public class Robot {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     @Override
