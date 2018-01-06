@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
@@ -59,10 +60,10 @@ public class RolodexActivity extends AppCompatActivity {
     private void init(){
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        recyclerView.setLayoutManager(new LinearLayoutManager(RolodexActivity.this, LinearLayoutManager.HORIZONTAL, false));
+        listRolodex = new ArrayList<>();
         cardAdapter = new CardAdapter(this, listRolodex);
         recyclerView.setAdapter(cardAdapter);
-        listRolodex = new ArrayList<>();
         // load data from here
         new MyHttpRequestTask().execute(Constants.URL);
     }
